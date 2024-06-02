@@ -1,0 +1,24 @@
+<div class="text-3xl text-center">DashBoard</div>
+<div class="text-center m-2 text-xl">This is the form</div>
+<div>
+    <form (submit)="onsubmit()">
+        <input class="bg-gray-100 p-1 m-1 rounded-md" name="name" [(ngModel)]="name" placeholder="Name" type="text" />
+        <input class="bg-gray-100 p-1 m-1 rounded-md" name="email" [(ngModel)]="email" placeholder="Email" type="text" />
+        <input class="bg-gray-100 p-1 m-1 rounded-md" name="number" [(ngModel)]="number" placeholder="Mobile no." type="text" />
+        <button type="submit" class="bg-green-600 w-24 m-1 p-1 rounded-md text-white">Add</button>
+    </form>
+    <!-- {{name}}
+    {{email}}
+    {{number}} -->
+    <div class="text-center text-xl">This is the Data</div>
+    <div  class="flex flex-col items-center justify-center">
+        <div class="flex flex-col gap-2 justify-center items-center w-1/2" *ngFor="let item of studentslist">
+            <div class="shadow-md w-1/2 p-1 m-1 border-t-8 rounded-md border-gray-500">
+                <div>Name- {{item.name}}</div>
+                <div>Email- {{item.email}}</div>
+                <div>Mobile no.- {{item.number}}</div>
+                <button (click)="delete(item)" class="bg-red-500 w-24 m-1 p-1 rounded-md text-white">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
