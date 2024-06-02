@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthserviceService } from '../authservice.service';
 import { DataService } from '../data.service';
 import { Student } from '../model/student';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -11,13 +12,7 @@ import { Student } from '../model/student';
 })
 export class DashboardComponent implements OnInit {
 
-  studentobj:Student = {
-    uid:'',
-    id: '',
-    name: '',
-    email: '',
-    number: ''
-  }
+  
   uid:string|null=""
   id:string=""
   name!:string
@@ -25,7 +20,7 @@ export class DashboardComponent implements OnInit {
   number!:string
   studentslist :Student[]=[]
 
-  constructor(private auth:AuthserviceService,private data:DataService) { }
+  constructor(private auth:AuthserviceService,private data:DataService,private router :Router) { }
 
   ngOnInit(): void {
     this.uid=localStorage.getItem('token')
@@ -33,12 +28,10 @@ export class DashboardComponent implements OnInit {
     this.getallstudents()
   }
 
-  resetform(){
-    this.id=""
-    this.name=""
-    this.email=""
-    this.number=""
+  add(){
+    this.router.navigate(['/form'])
   }
+  
 
   getallstudents(){
     this.data.getallstudents(this.uid).subscribe(res=>{
@@ -52,19 +45,9 @@ export class DashboardComponent implements OnInit {
     })
   }
 
-  onsubmit(){
-    this.addstudent()
-    this.resetform()
-  }
+  
 
-  addstudent(){
-    this.studentobj.uid=this.uid
-    this.studentobj.id=this.id,
-    this.studentobj.name=this.name,
-    this.studentobj.email=this.email,
-    this.studentobj.number=this.number
-    this.data.addstudent(this.studentobj)
-  }
+  
 
   delete(student:Student){
     this.data.deletestudent(student)
